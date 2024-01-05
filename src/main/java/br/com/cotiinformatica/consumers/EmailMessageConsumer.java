@@ -16,17 +16,12 @@ public class EmailMessageConsumer {
 	@Autowired
 	private EmailMessageComponent emailMessageComponent;
 
-	/*
-	  @Autowired	 
-	  private ObjectMapper objectMapper;
-	*/
-	
 	@RabbitListener(queues = { "${queue.name}" }) 
 	public void receive(@Payload String payload) throws Exception { 
 	
 		ObjectMapper objectMapper = new ObjectMapper(); 
 		
-	// deserializar o conteudo da fila 
+	// deserializando o conteudo da fila 
 	EmailMessageDTO dto = objectMapper.readValue(payload, EmailMessageDTO.class); 
 	
 	// enviando o email 
